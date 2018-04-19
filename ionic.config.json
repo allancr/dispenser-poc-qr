@@ -1,0 +1,8 @@
+{
+  "name": "SES-DF - PoC de proposta de solução para leitura de QR codes",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
