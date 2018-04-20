@@ -1,3 +1,7 @@
-page-home {
+page-qr-scanner {
+}
 
+// Fonte: https://forum.ionicframework.com/t/problem-with-showing-camera-preview-ionic-native-qr-scanner/107694/8
+ion-content,body, .app-root, ion-app,.scroll-content,.fixed-content,page-app {
+    background: none transparent !important;
 }
