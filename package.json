@@ -9,8 +9,7 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve",
-    "ionic:build:before": "sed -i \"s/exports.ANDROID_PLATFORM_PATH = path.join('platforms', 'android', 'assets', 'www');/exports.ANDROID_PLATFORM_PATH = path.join('platforms', 'android', 'app', 'src', 'main', 'assets', 'www');/\" node_modules/@ionic/app-scripts/dist/dev-server/serve-config.js"
+    "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
     "@angular/animations": "5.2.9",
