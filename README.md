@@ -3,8 +3,8 @@ Projeto para experimentar e demonstrar a leitura de códigos QR com projeto híb
 
 ## Debugando a aplicação em um dispositivo com Android
 ```
-$ git clone https://gitlab.allancr.webredirect.org/sesdf/dispenser/pocqr.git
-$ cd pocqr
+$ git clone https://github.com/allancr/dispenser-poc-qr.git
+$ cd dispenser-poc-qr
 $ ionic cordova run android --device -lc
 ```
 
