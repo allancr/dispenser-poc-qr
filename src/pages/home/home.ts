@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { AlertController } from 'ionic-angular';
 
@@ -11,55 +11,45 @@ export class HomePage {
 
   qrContent: any;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, private qrScanner: QRScanner, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private qrScanner: QRScanner, public alertCtrl: AlertController) {
   }
 
   ionViewWillEnter() {
-    // Optionally request the permission early
-    this.qrScanner.prepare()
+    this.qrScanner.prepare() // Solicita permissão para acesso aos recursos da câmera.
       .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          // camera permission was granted
-
-          // start scanning
-          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            this.qrContent = text;
+        if (status.authorized) { // Acesso concedido.
+          let scanSub = this.qrScanner.scan().subscribe((text: string) => { // Inicio o scanner.
+            this.qrContent = text; // A leitura foi efetuada com sucesso.
             
-            let alert = this.alertCtrl.create({
+            let alert = this.alertCtrl.create({ // Manipulo o resultado exibindo em uma janela de alerta ao usuário.
               title: 'QR code',
               subTitle: this.qrContent,
               buttons: [
                 {
                   text: 'OK!',
                   handler: () => {
-                    console.log('Disagree clicked');
                     this.navCtrl.setRoot(HomePage);
                   }
                 }]
             });
             alert.present();
 
-            this.qrScanner.hide(); // hide camera preview
-            scanSub.unsubscribe(); // stop scanning
+            this.qrScanner.hide(); // Escondo a preview da câmera.
+            scanSub.unsubscribe(); // Paro o serviço de scanner.
           });
 
-          // show camera preview
-          this.qrScanner.show();
-
-          // wait for user to scan something, then the observable callback will be called
+          this.qrScanner.show(); // Exibe a preview da câmera para o usuário.
         } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
+          // O acesso à câmera foi negado, tratar fluxo alternativo.
         } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
+          // O acesso à câmera foi negado uma única execução, não permanentemente. Poderá ser solicitado novamente.
         }
       })
-      .catch((e: any) => console.error('Error is', e));
+      .catch((e: any) => console.error('Erro inesperado!', e)); // Erro inesperado, tratar exceção.
   }
 
   ionViewDidLeave() {
-    this.qrScanner.hide(); // hide camera preview
+    this.qrScanner.hide(); // Escondo a preview da câmera.
   }
 
 }
